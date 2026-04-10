@@ -49,6 +49,8 @@ target_link_libraries(alaserMapping ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERES
 add_executable(kittiHelper src/kittiHelper.cpp)
 target_link_libraries(kittiHelper ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(ouster_preprocess src/ouster_preprocess.cpp)
+target_link_libraries(ouster_preprocess ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 
 

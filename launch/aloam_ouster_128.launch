@@ -1,6 +1,6 @@
 <launch>
     
-    <param name="scan_line" type="int" value="32" />
+    <param name="scan_line" type="int" value="128" />
 
     <!-- if 1, do mapping 10 Hz, if 2, do mapping 5 Hz. Suggest to use 1, it will adjust frequence automaticlly -->
     <param name="mapping_skip_frame" type="int" value="1" />
@@ -8,15 +8,17 @@
     <!-- remove too closed points -->
     <param name="minimum_range" type="double" value="0.3"/>
 
+    <!-- Ouster → Velodyne-compatible point cloud bridge -->
+    <node pkg="aloam_velodyne" type="ouster_preprocess" name="ouster_preprocess" output="screen" />
 
     <param name="mapping_line_resolution" type="double" value="0.01"/>
     <param name="mapping_plane_resolution" type="double" value="0.02"/>
 
-    <node pkg="aloam_velodyne" type="ascanRegistration" name="ascanRegistration" output="screen" />
+    <node pkg="aloam_velodyne" type="ascanRegistration" name="ascanRegistration" output="log" />
 
-    <node pkg="aloam_velodyne" type="alaserOdometry" name="alaserOdometry" output="screen" />
+    <node pkg="aloam_velodyne" type="alaserOdometry" name="alaserOdometry" output="log" />
 
-    <node pkg="aloam_velodyne" type="alaserMapping" name="alaserMapping" output="screen" />
+    <node pkg="aloam_velodyne" type="alaserMapping" name="alaserMapping" output="log" />
 
     <arg name="rviz" default="true" />
     <group if="$(arg rviz)">

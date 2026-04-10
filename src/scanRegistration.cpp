@@ -198,6 +198,14 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg)
                 continue;
             }
         }
+        else if (N_SCANS == 128){
+            // OS1-128: vertical FOV -22.5° to +22.5°, 128 evenly-spaced beams
+            scanID = int((angle + 22.5f) / (45.0f / 127.0f) + 0.5f);
+            if (scanID > (N_SCANS - 1) || scanID < 0){
+                count--;
+                continue;
+            }
+        }
         else
         {
             printf("wrong scan number\n");
@@ -469,9 +477,9 @@ int main(int argc, char **argv)
 
     printf("scan line number %d \n", N_SCANS);
 
-    if(N_SCANS != 16 && N_SCANS != 32 && N_SCANS != 64)
+    if(N_SCANS != 16 && N_SCANS != 32 && N_SCANS != 64 && N_SCANS != 128)
     {
-        printf("only support velodyne with 16, 32 or 64 scan line!");
+        printf("only support velodyne with 16, 32 or 64 scan line or ouster with 128!");
         return 0;
     }
 
