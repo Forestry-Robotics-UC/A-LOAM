@@ -9,10 +9,10 @@
     <param name="minimum_range" type="double" value="0.3"/>
 
     <!-- Ouster → Velodyne-compatible point cloud bridge -->
-    <node pkg="aloam_velodyne" type="ouster_preprocess" name="ouster_preprocess" output="screen" />
+    <node pkg="aloam_velodyne" type="ouster_preprocess" name="ouster_preprocess" output="log" />
 
-    <param name="mapping_line_resolution" type="double" value="0.01"/>
-    <param name="mapping_plane_resolution" type="double" value="0.02"/>
+    <param name="mapping_line_resolution" type="double" value="0.075"/>
+    <param name="mapping_plane_resolution" type="double" value="0.15"/>
 
     <node pkg="aloam_velodyne" type="ascanRegistration" name="ascanRegistration" output="log" />
 
