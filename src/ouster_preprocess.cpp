@@ -82,10 +82,12 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "ouster_preprocess");
     ros::NodeHandle nh;
+	int queue_size;
+	nh.param<int>("queue_size", queue_size, 0);
 
     ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2>
-        ("/ouster/points", 10, cloudHandler);
-    pub = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_points", 10);
+        ("/ouster/points", queue_size, cloudHandler);
+    pub = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_points", queue_size);
 
     ROS_INFO("ouster_preprocess: converting /ouster/points → /velodyne_points");
     ros::spin();
